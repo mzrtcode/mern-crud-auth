@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 // Esto es lo que se va a guardar en la base de datos
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
     username:{
         type: String,
         required: true,
@@ -17,6 +17,8 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
+},{
+    timestamps: true,
 });
 
 // Esto es para interactuar con la base de datos con los metodos .add() find() etc
