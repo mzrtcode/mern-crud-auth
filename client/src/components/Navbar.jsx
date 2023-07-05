@@ -45,7 +45,10 @@ function Navbar() {
                     )}
                 </ul>
             </nav>
+            <main className="container mx-auto px-10">
             <Outlet />
+            </main>
+            
         </>
     )
 }
