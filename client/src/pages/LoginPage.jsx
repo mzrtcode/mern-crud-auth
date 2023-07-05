@@ -54,7 +54,8 @@ function LoginPage() {
             )
           }
 
-          <button type="submit">
+          <button type="submit"
+           className='bg-green-500 p-2 rounded-md mt-2'>
             Login
           </button>
         </form>

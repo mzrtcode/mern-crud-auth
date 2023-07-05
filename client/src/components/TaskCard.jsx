@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useTasks } from "../context/TasksContext"
+import dayjs from 'dayjs'
+import second from 'dayjs/plugin/utc'
 
 const TaskCard = ({ task }) => {
 
@@ -20,7 +22,7 @@ const TaskCard = ({ task }) => {
                 </div>
             </header>
             <p className="text-slate-300">{task.description}</p>
-            <p>{new Date(task.date).toLocaleDateString()}</p>
+            <p> {dayjs(task.date).format('DD/MM/YYYY')}</p>
         </div>
     )
 }
