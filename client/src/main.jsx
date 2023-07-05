@@ -16,54 +16,65 @@ import TaskFormPage from './pages/TaskFormPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import ProtectedRoute from './pages/ProtectedRoute.jsx';
 import { TaskProvider } from './context/TasksContext.jsx';
+import Navbar from './components/Navbar.jsx';
 
 const router = createBrowserRouter([
   // RUTAS PUBLICAS
-  {
+{
     path: "/",
-    element: <HomePage />,
-  },
-  {
-    path: "/login",
-    element: <LoginPage />,
-  },
-  {
-    path: "/register",
-    element: <RegisterPage />,
-  },
-
-  // RUTAS PRIVADAS
-  {
-    path: "/",
-    element: <ProtectedRoute />, //Elemento padre
+    element: <Navbar />,
     children: [
       {
-        path: "/tasks",
-        element: <TaskPage />,
+        path: "/",
+        element: <HomePage />,
       },
       {
-        path: "/add-task",
-        element: <TaskFormPage />
+        path: "/login",
+        element: <LoginPage />,
       },
       {
-        path: "/tasks/:id",
-        element: <TaskFormPage />,
+        path: "/register",
+        element: <RegisterPage />,
       },
       {
-        path: "/profile",
-        element: <ProfilePage />,
-      },
+        path: "/",
+        element: <ProtectedRoute />, //Elemento padre
+        children: [
+          {
+            path: "/tasks",
+            element: <TaskPage />,
+          },
+          {
+            path: "/add-task",
+            element: <TaskFormPage />
+          },
+          {
+            path: "/tasks/:id",
+            element: <TaskFormPage />,
+          },
+          {
+            path: "/profile",
+            element: <ProfilePage />,
+          },
+        ]
+      }
     ]
-  }
+}
+  
+
+  // RUTAS PRIVADAS
+  
 ]);
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-   <TaskProvider>
-   <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
-   </TaskProvider>
+    <TaskProvider>
+      <AuthProvider>
+        <RouterProvider router={router}>
+          <Navbar />
+        </RouterProvider>
+      </AuthProvider>
+    </TaskProvider>
   </React.StrictMode>,
 )
