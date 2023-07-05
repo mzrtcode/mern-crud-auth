@@ -15,6 +15,7 @@ import TaskPage from './pages/TaskPage.jsx';
 import TaskFormPage from './pages/TaskFormPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import ProtectedRoute from './pages/ProtectedRoute.jsx';
+import { TaskProvider } from './context/TasksContext.jsx';
 
 const router = createBrowserRouter([
   // RUTAS PUBLICAS
@@ -24,33 +25,33 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <LoginPage/>,
+    element: <LoginPage />,
   },
   {
     path: "/register",
-    element: <RegisterPage/>,
+    element: <RegisterPage />,
   },
 
-   // RUTAS PRIVADAS
+  // RUTAS PRIVADAS
   {
     path: "/",
-    element: <ProtectedRoute/>, //Elemento padre
-    children:[
+    element: <ProtectedRoute />, //Elemento padre
+    children: [
       {
         path: "/tasks",
-        element: <TaskPage/>,
+        element: <TaskPage />,
       },
       {
         path: "/add-task",
-        element: <TaskFormPage/>
+        element: <TaskFormPage />
       },
       {
         path: "/tasks/:id",
-        element: <TaskFormPage/>,
+        element: <TaskFormPage />,
       },
       {
         path: "/profile",
-        element: <ProfilePage/>,
+        element: <ProfilePage />,
       },
     ]
   }
@@ -59,8 +60,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <AuthProvider>
-    <RouterProvider router={router} />
+   <TaskProvider>
+   <AuthProvider>
+      <RouterProvider router={router} />
     </AuthProvider>
+   </TaskProvider>
   </React.StrictMode>,
 )
