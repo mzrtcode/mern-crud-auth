@@ -10,11 +10,17 @@ import {
 import RegisterPage from './pages/RegisterPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import { AuthProvider } from './context/AuthContext.jsx';
+import HomePage from './pages/HomePage.jsx';
+import TaskPage from './pages/TaskPage.jsx';
+import TaskFormPage from './pages/TaskFormPage.jsx';
+import ProfilePage from './pages/ProfilePage.jsx';
+import ProtectedRoute from './pages/ProtectedRoute.jsx';
 
 const router = createBrowserRouter([
+  // RUTAS PUBLICAS
   {
     path: "/",
-    element: <h1>Home page</h1>,
+    element: <HomePage />,
   },
   {
     path: "/login",
@@ -24,22 +30,30 @@ const router = createBrowserRouter([
     path: "/register",
     element: <RegisterPage/>,
   },
+
+   // RUTAS PRIVADAS
   {
-    path: "/tasks",
-    element: <h1>Tasks</h1>,
-  },
-  {
-    path: "/add-task",
-    element: <h1>Add task</h1>,
-  },
-  {
-    path: "/tasks/:id",
-    element: <h1>Update task</h1>,
-  },
-  {
-    path: "/profile",
-    element: <h1>Profile</h1>,
-  },
+    path: "/",
+    element: <ProtectedRoute/>, //Elemento padre
+    children:[
+      {
+        path: "/tasks",
+        element: <TaskPage/>,
+      },
+      {
+        path: "/add-task",
+        element: <TaskFormPage/>
+      },
+      {
+        path: "/tasks/:id",
+        element: <TaskFormPage/>,
+      },
+      {
+        path: "/profile",
+        element: <ProfilePage/>,
+      },
+    ]
+  }
 ]);
 
 
